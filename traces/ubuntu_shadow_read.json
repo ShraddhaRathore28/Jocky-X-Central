@@ -1,0 +1,54 @@
+{
+ "meta": {
+  "name": "ubuntu_shadow_read",
+  "description": "unexpected process reads /etc/shadow",
+  "expect": {
+   "rules": [
+    "JOCKY-RULE-007"
+   ]
+  }
+ },
+ "events": [
+  {
+   "event_id": "EVT-101",
+   "ts": "2026-09-30T10:31:00Z",
+   "endpoint_id": "UBU-03",
+   "os": "Ubuntu",
+   "kind": "process_create",
+   "pid": 2000,
+   "ppid": 1,
+   "name": "bash",
+   "path": "/usr/bin/bash",
+   "cmdline": "bash",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-102",
+   "ts": "2026-09-30T10:31:01Z",
+   "endpoint_id": "UBU-03",
+   "os": "Ubuntu",
+   "kind": "process_create",
+   "pid": 2100,
+   "ppid": 2000,
+   "name": "reader",
+   "path": "/usr/local/bin/reader",
+   "cmdline": "reader",
+   "user": "user",
+   "signed": false
+  },
+  {
+   "event_id": "EVT-103",
+   "ts": "2026-09-30T10:31:02Z",
+   "endpoint_id": "UBU-03",
+   "os": "Ubuntu",
+   "kind": "file_op",
+   "pid": 2100,
+   "name": "reader",
+   "data": {
+    "path": "/etc/shadow",
+    "action": "read"
+   }
+  }
+ ]
+}

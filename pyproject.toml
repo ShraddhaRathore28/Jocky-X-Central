@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jockyx"
+version = "1.0.0"
+description = "JOCKY-X: cross-platform defensive forensic detection & investigation language and framework (SIH26148)"
+requires-python = ">=3.9"
+readme = "README.md"
+license = {text = "MIT"}
+dependencies = []
+
+[project.optional-dependencies]
+live = ["psutil>=5.9"]
+dev = ["psutil>=5.9", "pytest>=7"]
+
+[project.scripts]
+jocky = "jockyx.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["jockyx*"]
+
+[tool.setuptools.package-data]
+jockyx = ["server/static/*.html"]

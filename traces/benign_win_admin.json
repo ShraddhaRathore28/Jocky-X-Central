@@ -1,0 +1,82 @@
+{
+ "meta": {
+  "name": "benign_win_admin",
+  "description": "admin runs signed git via PowerShell; signed driver load",
+  "expect": {
+   "rules": []
+  }
+ },
+ "events": [
+  {
+   "event_id": "EVT-101",
+   "ts": "2026-09-30T10:31:00Z",
+   "endpoint_id": "WIN-07",
+   "os": "Windows",
+   "kind": "process_create",
+   "pid": 7000,
+   "ppid": 1,
+   "name": "explorer.exe",
+   "path": "C:\\Windows\\explorer.exe",
+   "cmdline": "explorer.exe",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-102",
+   "ts": "2026-09-30T10:31:01Z",
+   "endpoint_id": "WIN-07",
+   "os": "Windows",
+   "kind": "process_create",
+   "pid": 7100,
+   "ppid": 7000,
+   "name": "powershell.exe",
+   "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+   "cmdline": "powershell.exe",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-103",
+   "ts": "2026-09-30T10:31:02Z",
+   "endpoint_id": "WIN-07",
+   "os": "Windows",
+   "kind": "process_create",
+   "pid": 7200,
+   "ppid": 7100,
+   "name": "git.exe",
+   "path": "C:\\Program Files\\Git\\cmd\\git.exe",
+   "cmdline": "git.exe",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-104",
+   "ts": "2026-09-30T10:31:03Z",
+   "endpoint_id": "WIN-07",
+   "os": "Windows",
+   "kind": "network_conn",
+   "pid": 7200,
+   "name": "git.exe",
+   "data": {
+    "dst_ip": "140.82.112.3",
+    "dst_port": 443,
+    "protocol": "tcp",
+    "direction": "outbound",
+    "external": true
+   }
+  },
+  {
+   "event_id": "EVT-105",
+   "ts": "2026-09-30T10:31:04Z",
+   "endpoint_id": "WIN-07",
+   "os": "Windows",
+   "kind": "driver_load",
+   "name": "ntfs.sys",
+   "path": "C:\\Windows\\System32\\drivers\\ntfs.sys",
+   "signed": true,
+   "data": {
+    "in_baseline": true
+   }
+  }
+ ]
+}

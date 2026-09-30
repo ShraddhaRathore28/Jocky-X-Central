@@ -1,0 +1,55 @@
+{
+ "meta": {
+  "name": "win_office_macro_chain",
+  "description": "winword -> cmd -> powershell (parent-child anomaly only)",
+  "expect": {
+   "rules": [
+    "JOCKY-RULE-001"
+   ]
+  }
+ },
+ "events": [
+  {
+   "event_id": "EVT-101",
+   "ts": "2026-09-30T10:31:00Z",
+   "endpoint_id": "WIN-05",
+   "os": "Windows",
+   "kind": "process_create",
+   "pid": 5000,
+   "ppid": 1,
+   "name": "explorer.exe",
+   "path": "C:\\Windows\\explorer.exe",
+   "cmdline": "explorer.exe",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-102",
+   "ts": "2026-09-30T10:31:01Z",
+   "endpoint_id": "WIN-05",
+   "os": "Windows",
+   "kind": "process_create",
+   "pid": 5100,
+   "ppid": 5000,
+   "name": "WINWORD.EXE",
+   "path": "C:\\Program Files\\Microsoft Office\\WINWORD.EXE",
+   "cmdline": "WINWORD.EXE",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-103",
+   "ts": "2026-09-30T10:31:02Z",
+   "endpoint_id": "WIN-05",
+   "os": "Windows",
+   "kind": "process_create",
+   "pid": 5200,
+   "ppid": 5100,
+   "name": "cmd.exe",
+   "path": "C:\\Windows\\System32\\cmd.exe",
+   "cmdline": "cmd.exe",
+   "user": "user",
+   "signed": true
+  }
+ ]
+}

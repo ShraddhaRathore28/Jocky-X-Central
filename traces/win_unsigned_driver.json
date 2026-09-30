@@ -1,0 +1,39 @@
+{
+ "meta": {
+  "name": "win_unsigned_driver",
+  "description": "unsigned driver appears that is not in baseline",
+  "expect": {
+   "rules": [
+    "JOCKY-RULE-004"
+   ]
+  }
+ },
+ "events": [
+  {
+   "event_id": "EVT-101",
+   "ts": "2026-09-30T10:31:00Z",
+   "endpoint_id": "WIN-08",
+   "os": "Windows",
+   "kind": "driver_load",
+   "name": "ntfs.sys",
+   "path": "C:\\Windows\\System32\\drivers\\ntfs.sys",
+   "signed": true,
+   "data": {
+    "in_baseline": true
+   }
+  },
+  {
+   "event_id": "EVT-102",
+   "ts": "2026-09-30T10:31:01Z",
+   "endpoint_id": "WIN-08",
+   "os": "Windows",
+   "kind": "driver_load",
+   "name": "mystery_drv.sys",
+   "path": "C:\\Windows\\System32\\drivers\\mystery_drv.sys",
+   "signed": false,
+   "data": {
+    "in_baseline": false
+   }
+  }
+ ]
+}

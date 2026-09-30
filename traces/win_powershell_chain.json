@@ -1,0 +1,87 @@
+{
+ "meta": {
+  "name": "win_powershell_chain",
+  "description": "explorer -> powershell -> unsigned updater; external net + rwx memory",
+  "expect": {
+   "rules": [
+    "JOCKY-RULE-003",
+    "JOCKY-RULE-009",
+    "JOCKY-RULE-017"
+   ]
+  }
+ },
+ "events": [
+  {
+   "event_id": "EVT-101",
+   "ts": "2026-09-30T10:31:00Z",
+   "endpoint_id": "WIN-04",
+   "os": "Windows",
+   "kind": "process_create",
+   "pid": 4000,
+   "ppid": 1,
+   "name": "explorer.exe",
+   "path": "C:\\Windows\\explorer.exe",
+   "cmdline": "explorer.exe",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-102",
+   "ts": "2026-09-30T10:31:01Z",
+   "endpoint_id": "WIN-04",
+   "os": "Windows",
+   "kind": "process_create",
+   "pid": 4100,
+   "ppid": 4000,
+   "name": "powershell.exe",
+   "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+   "cmdline": "powershell.exe",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-103",
+   "ts": "2026-09-30T10:31:02Z",
+   "endpoint_id": "WIN-04",
+   "os": "Windows",
+   "kind": "process_create",
+   "pid": 4200,
+   "ppid": 4100,
+   "name": "updater.exe",
+   "path": "C:\\ProgramData\\Updater\\updater.exe",
+   "cmdline": "updater.exe --sync",
+   "user": "user",
+   "signed": false
+  },
+  {
+   "event_id": "EVT-104",
+   "ts": "2026-09-30T10:31:03Z",
+   "endpoint_id": "WIN-04",
+   "os": "Windows",
+   "kind": "network_conn",
+   "pid": 4200,
+   "name": "updater.exe",
+   "data": {
+    "dst_ip": "203.0.113.50",
+    "dst_port": 443,
+    "protocol": "tcp",
+    "direction": "outbound",
+    "external": true
+   }
+  },
+  {
+   "event_id": "EVT-105",
+   "ts": "2026-09-30T10:31:04Z",
+   "endpoint_id": "WIN-04",
+   "os": "Windows",
+   "kind": "memory_event",
+   "pid": 4200,
+   "name": "updater.exe",
+   "data": {
+    "kind": "rwx_unbacked_region",
+    "region_perm": "rwx",
+    "unbacked": true
+   }
+  }
+ ]
+}

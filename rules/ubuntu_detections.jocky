@@ -1,0 +1,24 @@
+RULE JOCKY-RULE-005 "Shell spawned by a web server"
+CLASS "Possible Web Shell Activity"
+ATTACK "T1505.003", "T1059.004"
+SCAN PROCESS
+WHERE parent IN ["nginx", "apache2", "httpd", "php-fpm"]
+  AND name IN ["sh", "bash", "dash"]
+REPORT severity HIGH
+
+RULE JOCKY-RULE-006 "Binary running from temp/shm with external network"
+CLASS "Suspicious Execution Location"
+ATTACK "T1036", "T1071"
+SCAN PROCESS
+WHERE (path ~ "/tmp/" OR path ~ "/dev/shm/")
+  AND external_network = TRUE
+REPORT severity HIGH
+
+RULE JOCKY-RULE-007 "Credential store read by unexpected process"
+CLASS "Credential Access Indicator"
+ATTACK "T1003.008"
+SCAN FILE
+WHERE action = "read"
+  AND path ~ "/etc/shadow"
+  AND NOT process IN ["passwd", "sudo", "sshd", "login", "su", "unix_chkpwd", "systemd", "cron"]
+REPORT severity HIGH

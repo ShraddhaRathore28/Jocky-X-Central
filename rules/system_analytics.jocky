@@ -1,0 +1,22 @@
+# Memory / driver / system analytics (indicator detection only; nothing is injected or loaded).
+
+RULE JOCKY-RULE-003 "Executable, unbacked memory region observed"
+CLASS "Suspicious Memory Behavior"
+ATTACK "T1055"
+SCAN MEMORY_EVENT
+WHERE kind = "rwx_unbacked_region" AND unbacked = TRUE
+REPORT severity HIGH
+
+RULE JOCKY-RULE-004 "Unsigned driver/module outside known-good baseline"
+CLASS "Unusual Driver Activity"
+ATTACK "T1068", "T1547.006"
+SCAN DRIVER_EVENT
+WHERE unsigned = TRUE AND in_baseline = FALSE
+REPORT severity HIGH
+
+RULE JOCKY-RULE-008 "Outbound connection to non-standard C2-like port"
+CLASS "Suspicious Network Behavior"
+ATTACK "T1571"
+SCAN NETWORK
+WHERE external = TRUE AND dst_port IN [4444, 1337, 31337, 6667]
+REPORT severity MEDIUM

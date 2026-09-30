@@ -1,0 +1,74 @@
+{
+ "meta": {
+  "name": "ubuntu_tmp_beacon",
+  "description": "unsigned binary in /tmp beacons to port 4444, rwx region",
+  "expect": {
+   "rules": [
+    "JOCKY-RULE-003",
+    "JOCKY-RULE-006",
+    "JOCKY-RULE-008",
+    "JOCKY-RULE-009"
+   ]
+  }
+ },
+ "events": [
+  {
+   "event_id": "EVT-101",
+   "ts": "2026-09-30T10:31:00Z",
+   "endpoint_id": "UBU-02",
+   "os": "Ubuntu",
+   "kind": "process_create",
+   "pid": 1000,
+   "ppid": 1,
+   "name": "systemd",
+   "path": "/usr/lib/systemd/systemd",
+   "cmdline": "systemd",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-102",
+   "ts": "2026-09-30T10:31:01Z",
+   "endpoint_id": "UBU-02",
+   "os": "Ubuntu",
+   "kind": "process_create",
+   "pid": 1500,
+   "ppid": 1000,
+   "name": ".x",
+   "path": "/tmp/.x",
+   "cmdline": ".x",
+   "user": "user",
+   "signed": false
+  },
+  {
+   "event_id": "EVT-103",
+   "ts": "2026-09-30T10:31:02Z",
+   "endpoint_id": "UBU-02",
+   "os": "Ubuntu",
+   "kind": "network_conn",
+   "pid": 1500,
+   "name": ".x",
+   "data": {
+    "dst_ip": "203.0.113.99",
+    "dst_port": 4444,
+    "protocol": "tcp",
+    "direction": "outbound",
+    "external": true
+   }
+  },
+  {
+   "event_id": "EVT-104",
+   "ts": "2026-09-30T10:31:03Z",
+   "endpoint_id": "UBU-02",
+   "os": "Ubuntu",
+   "kind": "memory_event",
+   "pid": 1500,
+   "name": ".x",
+   "data": {
+    "kind": "rwx_unbacked_region",
+    "region_perm": "rwx",
+    "unbacked": true
+   }
+  }
+ ]
+}

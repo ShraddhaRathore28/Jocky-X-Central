@@ -1,0 +1,57 @@
+{
+ "meta": {
+  "name": "win_script_host_net",
+  "description": "wscript reaches an external host",
+  "expect": {
+   "rules": [
+    "JOCKY-RULE-002"
+   ]
+  }
+ },
+ "events": [
+  {
+   "event_id": "EVT-101",
+   "ts": "2026-09-30T10:31:00Z",
+   "endpoint_id": "WIN-06",
+   "os": "Windows",
+   "kind": "process_create",
+   "pid": 6000,
+   "ppid": 1,
+   "name": "explorer.exe",
+   "path": "C:\\Windows\\explorer.exe",
+   "cmdline": "explorer.exe",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-102",
+   "ts": "2026-09-30T10:31:01Z",
+   "endpoint_id": "WIN-06",
+   "os": "Windows",
+   "kind": "process_create",
+   "pid": 6100,
+   "ppid": 6000,
+   "name": "wscript.exe",
+   "path": "C:\\Windows\\System32\\wscript.exe",
+   "cmdline": "wscript.exe",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-103",
+   "ts": "2026-09-30T10:31:02Z",
+   "endpoint_id": "WIN-06",
+   "os": "Windows",
+   "kind": "network_conn",
+   "pid": 6100,
+   "name": "wscript.exe",
+   "data": {
+    "dst_ip": "198.51.100.7",
+    "dst_port": 443,
+    "protocol": "tcp",
+    "direction": "outbound",
+    "external": true
+   }
+  }
+ ]
+}

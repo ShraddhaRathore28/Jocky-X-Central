@@ -1,0 +1,13 @@
+{
+  "weights": {
+    "suspicious_ancestry": 25, "unsigned_executable": 20, "abnormal_network": 18,
+    "suspicious_memory": 24, "execution_from_temp": 12, "unusual_port": 15,
+    "sensitive_file_access": 20, "unsigned_driver": 30, "driver_not_in_baseline": 20
+  },
+  "bands": {"CRITICAL": 90, "HIGH": 60, "MEDIUM": 30, "LOW": 0},
+  "suspicious_parents": ["powershell", "pwsh", "cmd", "wscript", "cscript", "mshta", "winword", "excel", "outlook",
+                         "bash", "sh", "dash", "nginx", "apache2", "httpd", "php-fpm", "python3"],
+  "temp_markers": ["\\temp\\", "/tmp/", "/dev/shm/", "\\appdata\\local\\temp"],
+  "usual_ports": [80, 443, 53, 22, 123, 8080, 8443],
+  "sensitive_paths": ["/etc/shadow", "/etc/sudoers", "\\config\\sam", "\\ntds.dit", ".ssh/id_"]
+}

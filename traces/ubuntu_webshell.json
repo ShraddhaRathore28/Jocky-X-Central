@@ -1,0 +1,71 @@
+{
+ "meta": {
+  "name": "ubuntu_webshell",
+  "description": "nginx -> sh -> curl to external host",
+  "expect": {
+   "rules": [
+    "JOCKY-RULE-005"
+   ]
+  }
+ },
+ "events": [
+  {
+   "event_id": "EVT-101",
+   "ts": "2026-09-30T10:31:00Z",
+   "endpoint_id": "UBU-01",
+   "os": "Ubuntu",
+   "kind": "process_create",
+   "pid": 900,
+   "ppid": 1,
+   "name": "nginx",
+   "path": "/usr/sbin/nginx",
+   "cmdline": "nginx",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-102",
+   "ts": "2026-09-30T10:31:01Z",
+   "endpoint_id": "UBU-01",
+   "os": "Ubuntu",
+   "kind": "process_create",
+   "pid": 901,
+   "ppid": 900,
+   "name": "sh",
+   "path": "/usr/bin/dash",
+   "cmdline": "sh -c id",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-103",
+   "ts": "2026-09-30T10:31:02Z",
+   "endpoint_id": "UBU-01",
+   "os": "Ubuntu",
+   "kind": "process_create",
+   "pid": 902,
+   "ppid": 901,
+   "name": "curl",
+   "path": "/usr/bin/curl",
+   "cmdline": "curl",
+   "user": "user",
+   "signed": true
+  },
+  {
+   "event_id": "EVT-104",
+   "ts": "2026-09-30T10:31:03Z",
+   "endpoint_id": "UBU-01",
+   "os": "Ubuntu",
+   "kind": "network_conn",
+   "pid": 902,
+   "name": "curl",
+   "data": {
+    "dst_ip": "192.0.2.10",
+    "dst_port": 443,
+    "protocol": "tcp",
+    "direction": "outbound",
+    "external": true
+   }
+  }
+ ]
+}

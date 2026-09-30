@@ -1,0 +1,33 @@
+# Windows execution-chain detections (defensive). Rules only QUERY telemetry.
+
+RULE JOCKY-RULE-017 "Unsigned child of PowerShell with network activity"
+CLASS "Suspicious Execution Chain"
+ATTACK "T1059.001", "T1071"
+SCAN PROCESS
+WHERE parent = "powershell"
+  AND unsigned = TRUE
+  AND network = TRUE
+REPORT severity HIGH
+
+RULE JOCKY-RULE-001 "Office application spawning a command interpreter"
+CLASS "Suspicious Parent-Child Relationship"
+ATTACK "T1204.002", "T1059.003"
+SCAN PROCESS
+WHERE parent IN ["winword", "excel", "outlook"]
+  AND name IN ["cmd", "powershell", "wscript", "mshta"]
+REPORT severity HIGH
+
+RULE JOCKY-RULE-002 "Script host with external network connection"
+CLASS "Suspicious Network Behavior"
+ATTACK "T1218.005", "T1071"
+SCAN PROCESS
+WHERE name IN ["wscript", "cscript", "mshta"]
+  AND external_network = TRUE
+REPORT severity MEDIUM
+
+RULE JOCKY-RULE-009 "Unsigned process with memory anomaly and external network"
+CLASS "Abnormal Execution Chain"
+ATTACK "T1055", "T1071"
+SCAN PROCESS
+WHERE unsigned = TRUE AND memory_anomaly = TRUE AND external_network = TRUE
+REPORT severity CRITICAL
